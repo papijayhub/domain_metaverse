@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_tint">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="127dp"
+        app:srcCompat='@drawable/owl_book'
+        android:contentDescription="@string/app_name"
+        android:layout_marginTop="50dp"/>
+    <EditText
+        android:id="@+id/username"
+        android:textColorHint="@color/cardview_shadow_start_color"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:hint="@string/enter_username"
+        android:autofillHints="username"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
+        android:background="#ffffff"
+        android:layout_marginTop="30dp"
+        android:drawableEnd="@drawable/ic_user"
+        android:drawableTint="@color/black"/>
+    <EditText
+        android:id="@+id/password"
+        android:textColorHint="@color/cardview_shadow_start_color"
+        android:layout_width="190dp"
+        android:layout_height="40dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textColor="@color/black"
+        android:inputType="textPassword"
+        android:hint="@string/string_password"
+        android:autofillHints="password"
+        android:background="#ffffff"
+        android:layout_marginTop="20dp"
+        android:drawableEnd="@drawable/ic_password"
+        android:drawableTint="@color/black"/>
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/string_Login"/>
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="33dp"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:orientation="horizontal" /> -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="@string/not_register"/>
+    <TextView
+        android:id="@+id/textview_register"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textStyle="bold"
+        android:text="@string/register"/>
+
+
+
+</LinearLayout>
