@@ -3,12 +3,13 @@ package com.jyclmb.metaverseapp.api;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class RetrofitBuilder {
     public Retrofit retrofit;
 
     public RetrofitBuilder(){
         retrofit = new Retrofit.Builder()
-                .baseURL(BaseURL.baseURL())
+                .baseUrl(BaseURL.baseURL())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

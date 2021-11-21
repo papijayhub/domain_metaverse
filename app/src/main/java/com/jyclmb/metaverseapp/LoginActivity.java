@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.button.MaterialButton;
+
 import com.jyclmb.metaverseapp.api.RequestPlaceholder;
 import com.jyclmb.metaverseapp.api.RetrofitBuilder;
 import com.jyclmb.metaverseapp.pojos.Login;
@@ -22,49 +22,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
-//    EditText mTextUsername;
-//    EditText mTextPassword;
-//    Button mButtonLogin;
-//    TextView mTextViewRegister;
-//
-//    public RetrofitBuilder retrofitBuilder;
-//    public RequestPlaceholder requestPlaceholder;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_login);
-//
-//        mTextUsername = (EditText) findViewById(R.id.edittext_username);
-//        mTextPassword = (EditText) findViewById(R.id.edittext_password);
-//        mButtonLogin = (Button) findViewById(R.id.button_login);
-//        mTextViewRegister = (TextView) findViewById(R.id.textview_register);
-//
-//        retrofitBuilder new RetrofitBuilder();
-//        requestPlaceholder = retrofitBuilder.getRetrofit()create(RequestPlaceholder.class);
-//
-//        mTextViewRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent registerIntent = new Intent(LoginActivity.this, com.jyclmb.metaverseapp.RegisteredActivity.class);
-//                startActivity(registerIntent);
-//            }
-//        });
 
-    public EditText username, password;
-    public Button button_login;
-
+    private EditText username,password;
+    private Button button_login;
     public RetrofitBuilder retrofitBuilder;
-    public Retrofit requestPlaceholder;
+    public RequestPlaceholder requestPlaceholder;
 
     @Override
-            protected  void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        button_login = findViewById(R.id.button_login);
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        button_login = (Button) findViewById(R.id.button_login);
 
         retrofitBuilder = new RetrofitBuilder();
         requestPlaceholder = retrofitBuilder.getRetrofit().create(RequestPlaceholder.class);
@@ -72,61 +43,48 @@ public class LoginActivity extends AppCompatActivity {
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (username.getText() != null && password.getText() != null){
-                    Call<login> loginCall = requestPlaceholder.Login(new Login(null, username=getText().toString(), null, null, password=getText().toString()));
+                if (username.getText() != null && password.getText() != null) {
+                    Call<Login> LoginCall = requestPlaceholder.login(new Login(null, username.getText().toString(), null, null, password.getText().toString()));
 
-                    loginCall.enqueue(new Callback<login>() {
+                    LoginCall.enqueue(new Callback<Login>() {
                         @Override
-                        public void onResponse(Call<login> call, Response<login> response) {
+                        public void onResponse(Call<Login> call, Response<Login> response) {
                             if (!response.isSuccessful()) {
                                 if (response.code() == 404) {
-                                    Toast.makeText(LoginActivity.this, "User not found", Toast.LENGTH_SHORT).show();
-                                    Log.e("LOGING_ERR", response.message());
+                                    Toast.makeText(LoginActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
+                                    Log.e("LOGIN_ERR 1", response.message());
+                                    Log.e("response code : " , String.valueOf(response.code()));
                                 } else {
-                                    Toast.makeText(LoginActivity.this, "There was an error upon logginH in the API", Toast.LENGTH_SHORT).show();
-                                    Log.e("LOGING_ERR", response.message());
+                                    Toast.makeText(LoginActivity.this, "There was an error upon logging in the API", Toast.LENGTH_SHORT).show();
+                                    Log.e("LOGIN_ERR 2", response.message());
                                 }
-
-                            } else {
+                            }else{
                                 if (response.code() == 200) {
-                                    login loginResponse = response.body();
+                                    Login loginResponse = response.body();
                                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                     intent.putExtra("USERID", loginResponse.getId());
                                     intent.putExtra("USERNAME", loginResponse.getUsername());
                                     intent.putExtra("TOKEN", loginResponse.getToken());
-                                    
+
                                     startActivity(intent);
                                     finish();
+//                                    Toast.makeText(getApplicationContext(), "Login API successful", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<login> call, Throwable t) {
-                            Toast.makeText(LoginActivity.this, "There was an error upon logginH in the API", Toast.LENGTH_SHORT).show();
-                            Log.e("LOGING_ERR", t.getMessage());
+                        public void onFailure(Call<Login> call, Throwable t) {
+                            Toast.makeText(LoginActivity.this, "There was an error upon logging in the API", Toast.LENGTH_SHORT).show();
+                            Log.e("LOGIN_ERR 2", t.getMessage());
                         }
                     });
                 } else {
-                    Toast.makeText(LoginActivity.this, "Please Supply All the Fields to Login!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Please supply all the fields to login!", Toast.LENGTH_SHORT).show();
                 }
-
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

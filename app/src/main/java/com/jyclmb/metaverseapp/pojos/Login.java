@@ -2,7 +2,7 @@ package com.jyclmb.metaverseapp.pojos;
 
 public class Login {
     private String token, username, id, name, password;
-            public Login() {}
+    public Login() {}
 
     public Login(String token, String username, String id, String name, String password) {
         this.token = token;
